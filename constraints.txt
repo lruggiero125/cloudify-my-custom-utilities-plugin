@@ -1,0 +1,3 @@
+# Contents of contraints.txt
+
+cloudify-common>=5.1.0

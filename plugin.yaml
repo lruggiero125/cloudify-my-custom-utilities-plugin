@@ -1,0 +1,53 @@
+#plugins:
+#  # Name could be anything, this name is what appears on the beginning of operation
+#  # mappings.
+#  plugin_name:
+#    # Could be 'central_deployment_agent' or 'host_agent'.
+#    # If 'central_deployment_agent', this plugin will be executed on the
+#    # deployment dedicated agent, other wise it will be executed on the host agent.
+#    executor: host_agent
+#
+#    # URL to archive containing the plugin or name of directory containing
+#    # the plugin if it is included in the the blueprint directory under the
+#    # "plugins" directory.
+#    # Usage of "source" is supported, but not recommended, as it results in the
+#    # plugin going through `pip` installation on each and every agent (thus requiring
+#    # access to the `pip` repository/mirror, compilers and so forth).
+#    # Usage of plugin Wagon files, whenever possible, is recommended.
+#    source: https://github.com/cloudify-cosmo/cloudify-plugin-template/archive/master.zip
+#
+#    # The plugin's name, as it is known to Cloudify Manager. Cloudify Manager uses this
+#    # name to index the plugin in the plugins table.
+#    package_name: 'my-plugin'
+#
+#    # The plugin's version. NOTE - it is recommended that this value is quoted, in order to
+#    # ensure it passes YAML parsing as a string (by default, the value "1.0" [without quotes]
+#    # will be parsed as a float).
+#    package_version: '1.0'
+
+
+
+plugins:
+  cloudify_my_custom_workflow:
+    executor: central_deployment_agent
+    source: https://github.com/cloudify-cosmo/cloudify-plugin-template/archive/master.zip
+    package_name: 'cloudify_my_custom_workflow'
+    package_version: '1.0'
+
+workflows:
+  my_workflow:
+    mapping: cloudify_my_custom_workflow.cloudify_my_custom_workflow.run_operation
+    parameters:
+      operation:
+        description: the operation to execute
+      type_name:
+        description: the base type for filtering nodes
+        default: cloudify.nodes.Root
+      operation_kwargs:
+        description: the operation kwargs
+        default: {}
+      is_node_operation:
+        description: >
+          is the operation a node operation or
+          a relationship operation otherwise
+        default: true
