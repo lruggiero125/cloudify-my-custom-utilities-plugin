@@ -30,7 +30,7 @@
 plugins:
   cloudify_my_custom_workflow:
     executor: central_deployment_agent
-    source: https://github.com/cloudify-cosmo/cloudify-plugin-template/archive/master.zip
+    source: https://github.com/lruggiero125/cloudify-my-custom-utilities-plugin/archive/master.zip
     package_name: 'cloudify_my_custom_workflow'
     package_version: '1.0'
 
